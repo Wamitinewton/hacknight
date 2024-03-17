@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../services/authentication/auth_controller.dart';
 
 class CustomFlatButton extends StatefulWidget {
   final VoidCallback onTap;
@@ -19,6 +22,7 @@ class CustomFlatButton extends StatefulWidget {
 
 class _CustomFlatButtonState extends State<CustomFlatButton>
     with SingleTickerProviderStateMixin {
+  final AuthController _authController = Get.find();
   late double _scale;
   late AnimationController _controller;
   @override
@@ -64,14 +68,9 @@ class _CustomFlatButtonState extends State<CustomFlatButton>
             ],
           ),
           child: Center(
-            child: Text(
-              widget.text,
-              style: GoogleFonts.poppins(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: widget.textColor),
-            ),
-          ),
+              child: Obx(() => _authController.isLoading.isFalse
+                  ? Text(widget.text)
+                  : const CircularProgressIndicator())),
         ),
       ),
     );

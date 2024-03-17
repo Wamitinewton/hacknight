@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:hacknight_project/repository/image_repo.dart';
 import 'package:hacknight_project/services/storage/profile_service.dart';
@@ -8,47 +8,44 @@ import 'package:hacknight_project/services/storage/profile_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AvatarController extends GetxController {
-  // final AuthController _controller = Get.find<AuthController>();
   final ImagePickerRepository _imagePickerRepository;
   final ProfileStorageService _storageService;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   AvatarController(this._imagePickerRepository, this._storageService);
 
   final RxString imagePath = ''.obs;
-  final String imagePathKey = 'profile_image_path' ;
+  final String imagePathKey = 'profile_image_path';
   // final RxString imagePath = ''.obs;
 
-@override
-void onInit(){
-  super.onInit();
-  // String uid = Get.find<AuthController>().
-  loadSavedImagePath();
-
-}
+  @override
+  void onInit() {
+    super.onInit();
+    // String uid = Get.find<AuthController>().
+    loadSavedImagePath();
+  }
 
   Future<void> pickImage() async {
     final String? pickedImagePath = await _imagePickerRepository.pickImage();
     if (pickedImagePath != null) {
       imagePath.value = pickedImagePath;
       await _storageService.uploadProfilePhoto(
-          File(pickedImagePath), "allzPUesvjVvZ1mYTs4ucVeqxF52");
+          File(pickedImagePath), FirebaseAuth.instance.currentUser!.uid);
 
-          await loadProfilePhoto('allzPUesvjVvZ1mYTs4ucVeqxF52');
-          saveImageToPrefs(pickedImagePath);
+      await loadProfilePhoto(FirebaseAuth.instance.currentUser!.uid);
+      saveImageToPrefs(pickedImagePath);
     }
   }
 
   Future<void> loadProfilePhoto(String userId) async {
-    const String userId = 'allzPUesvjVvZ1mYTs4ucVeqxF52';
+    String userId = FirebaseAuth.instance.currentUser!.uid;
     final String? photoUrl = await _storageService.getProfilePhotoUrl(userId);
     if (photoUrl != null) {
       imagePath.value = photoUrl;
 
       File imageFile = File(photoUrl);
 
-      if (await imageFile.exists()) {
-        
-      }
+      if (await imageFile.exists()) {}
     }
   }
 
@@ -64,5 +61,4 @@ void onInit(){
       imagePath.value = savedPath;
     }
   }
- 
 }

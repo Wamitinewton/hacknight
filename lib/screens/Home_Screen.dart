@@ -9,9 +9,9 @@ import 'package:hacknight_project/utils/timezone_util.dart';
 import 'appointment_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  final String? userName;
+  
 
-  HomeScreen({Key? key,  this.userName}) : super(key: key);
+  HomeScreen({Key? key,  }) : super(key: key);
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -19,8 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   // final AvatarController _avatarController = Get.put(
   //     AvatarController(ImagePickerRepository(), ProfileStorageService()));
-  late Stream<User?> _stream;
-  late User? _currentUser;
+ 
   @override
   
   List symptoms = [
@@ -46,13 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     updateGreetings();
-    userName = widget.userName!;
-    _stream = FirebaseAuth.instance.authStateChanges();
-    _stream.listen((User? user) { 
-      setState(() {
-        _currentUser = user;
-      });
-    });
+    
   }
 
   void updateGreetings() {
@@ -81,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     greeting,
                     style: const TextStyle(
-                      fontSize: 35,
+                      fontSize: 29,
                       fontWeight: FontWeight.w500,
                     ),
                   ),

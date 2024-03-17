@@ -108,7 +108,7 @@ class _TouchFingerViewState extends State<TouchFingerView> {
                 color: MyColors.kPrimaryColor,
                 textColor: Colors.white,
                 onTap: () {
-                  _checkBio();
+                  LoginScreen();
                 }),
             const SizedBox(height: 20),
             CustomFlatButton(

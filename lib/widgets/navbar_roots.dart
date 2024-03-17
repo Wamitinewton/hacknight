@@ -16,7 +16,7 @@ class _NavBarRootsState extends State<NavBarRoots> {
   int _selectedIndex = 0;
   final _screens = [
     //Home Screen
-    HomeScreen(userName: '',),
+    HomeScreen(),
     //Messages Screen
     MessagesScreen(),
     //Schedule Screen

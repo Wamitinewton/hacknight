@@ -32,7 +32,7 @@ class AppointmentScreen extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.offAll(HomeScreen(userName: ''));
+                          Get.offAll(HomeScreen());
                         },
                         child: const Icon(
                           Icons.arrow_back_ios_new,
@@ -42,7 +42,7 @@ class AppointmentScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.offAll(HomeScreen(userName: ''));
+                          Get.offAll(HomeScreen());
                         },
                         child: const Icon(
                           Icons.more_vert,

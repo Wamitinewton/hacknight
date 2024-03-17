@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import '../services/appointment_controller.dart';
-import '../services/authentication/signup_controller.dart';
+import '../services/authentication/auth_controller.dart';
 
 
 class ControllerBindings extends Bindings{

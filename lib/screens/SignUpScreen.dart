@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hacknight_project/services/authentication/signup_controller.dart';
+import 'package:hacknight_project/screens/Login_screen.dart';
+import 'package:hacknight_project/services/authentication/auth_controller.dart';
+import 'package:hacknight_project/utils/auth_option.dart';
 import 'package:local_auth/local_auth.dart';
 
 
@@ -210,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         TextButton(
                             onPressed: () {
-                              _checkBio();
+                              LoginScreen();
                             },
                             child: const Text(
                               "Login",
@@ -219,6 +221,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ))
                       ],
                     ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: AuthMethods(text: 'Google Authentication', authlogo: 'authlogo1',
+                      onTap: () {
+                        _controller.signInWithGoogle();
+                      },
+                       ),
+                    )
                   ],
                 ),
               ),

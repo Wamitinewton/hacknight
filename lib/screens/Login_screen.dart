@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 
 import '../Data/constants.dart';
-import '../services/authentication/signup_controller.dart';
+import '../services/authentication/auth_controller.dart';
 import '../widgets/navbar_roots.dart';
 import 'bezier_card.dart';
 import 'custom_buttons.dart';
