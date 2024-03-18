@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hacknight_project/services/authentication/auth_controller.dart';
 import 'package:hacknight_project/utils/circle_avatar.dart';
 import 'package:hacknight_project/utils/timezone_util.dart';
 
@@ -17,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final AuthController _authController = Get.put(AuthController());
   // final AvatarController _avatarController = Get.put(
   //     AvatarController(ImagePickerRepository(), ProfileStorageService()));
  
@@ -65,6 +68,22 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const SizedBox(
               height: 10,
+            ),
+            Row(
+              children: [
+                IconButton(
+                  
+                  onPressed: (){
+                    _authController.logOut();
+                  }, 
+                  
+                  icon: Icon(Icons.logout_outlined)),
+
+                  Text('Logout', style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
+                  ),)
+              ],
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),

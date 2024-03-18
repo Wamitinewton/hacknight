@@ -4,7 +4,7 @@ class AuthMethods extends StatelessWidget {
  final VoidCallback onTap;
   final String text;
   final String authlogo;
-  const AuthMethods({super.key, required this.text, required this.authlogo, required this.onTap});
+  const AuthMethods({super.key, required this.onTap, required this.text, required this.authlogo, });
 
   @override
   Widget build(BuildContext context) {

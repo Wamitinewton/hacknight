@@ -10,10 +10,13 @@ import 'package:hacknight_project/screens/Home_Screen.dart';
 import 'package:hacknight_project/screens/Login_screen.dart';
 
 class AuthController extends GetxController {
+  // bloc
+  // provider
   final TextEditingController name = TextEditingController();
   final TextEditingController mail = TextEditingController();
   final TextEditingController pwd = TextEditingController();
   final TextEditingController cfmpwd = TextEditingController();
+  // clean model architecture
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -86,16 +89,11 @@ class AuthController extends GetxController {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       user.value = result.user;
-      // UserModel user = UserModel(
-      //   name: name.text,
-      //   email: mail.text,
-      //   id: result.user!.uid,
-      //   password: pwd.text
-      // );
+     
       isLoading.value = false;
 
       Future.delayed(const Duration(seconds: 2), () {
-        // EasyLoading.dismiss();
+        
         Get.offAll(HomeScreen(
           
         ));
@@ -119,8 +117,9 @@ class AuthController extends GetxController {
     }
   }
  Future<User?> signInWithGoogle() async {
-  isLoading.value = true;
+  
   try {
+    isLoading.value = true;
     final GoogleSignInAccount? googleSignInAccount = await _gAuth.signIn();
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
@@ -138,6 +137,8 @@ class AuthController extends GetxController {
     }
   } catch (e) {
     Get.snackbar('Error', e.toString());
+  } finally{
+    isLoading.value = false;
   }
   return null;
  }

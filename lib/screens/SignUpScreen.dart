@@ -8,7 +8,6 @@ import 'package:hacknight_project/services/authentication/auth_controller.dart';
 import 'package:hacknight_project/utils/auth_option.dart';
 import 'package:local_auth/local_auth.dart';
 
-
 import '../Data/constants.dart';
 import '../widgets/navbar_roots.dart';
 import 'bezier_card.dart';
@@ -25,6 +24,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  // dependency injection
   final AuthController _controller = Get.find<AuthController>();
   static final TextEditingController mail = TextEditingController();
   static final TextEditingController name = TextEditingController();
@@ -212,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         TextButton(
                             onPressed: () {
-                              LoginScreen();
+                              Get.offAll(LoginScreen());
                             },
                             child: const Text(
                               "Login",
@@ -221,14 +221,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ))
                       ],
                     ),
-
                     Padding(
                       padding: const EdgeInsets.only(bottom: 15),
-                      child: AuthMethods(text: 'Google Authentication', authlogo: 'authlogo1',
-                      onTap: () {
-                        _controller.signInWithGoogle();
-                      },
-                       ),
+                      child: Center(
+                        child: Obx(() {
+                          return _controller.isLoading.value
+                              ? const CircularProgressIndicator()
+                              : AuthMethods(
+                                  text: 'Google Authentication',
+                                  authlogo: 'authlogo1',
+                                  onTap: () {
+                                    _controller.signInWithGoogle();
+                                  },
+                                );
+                        }),
+                      ),
                     )
                   ],
                 ),

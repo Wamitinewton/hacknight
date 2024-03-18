@@ -22,6 +22,8 @@
 
 class UserModel {
   UserModel({this.id, this.email, this.password, this.name});
+  // mockapi.io
+  // json to dart for github
 
   UserModel.fromJson(dynamic json) {
     id = json['_id'];

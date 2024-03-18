@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hacknight_project/screens/SignUpScreen.dart';
 import 'package:local_auth/local_auth.dart';
 
 import '../Data/constants.dart';
@@ -176,10 +177,10 @@ class _SignUpScreenState extends State<LoginScreen> {
                         ),
                         TextButton(
                             onPressed: () {
-                              _checkBio();
+                              Get.offAll(SignUpScreen());
                             },
                             child: const Text(
-                              "Login",
+                              "Sign up",
                               style: TextStyle(
                                   color: MyColors.kPrimaryColor, fontSize: 14),
                             ))
